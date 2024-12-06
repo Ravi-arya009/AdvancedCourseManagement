@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('grades', function (Blueprint $table) {
             $table->id();
-            $table->string('role_name')->unique();
+            $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->string('grade')->nullable();
             $table->timestamps();
         });
     }
@@ -23,7 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users'); // dropping users table first because of role_id foreign key dependecy
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('grades');
     }
 };
