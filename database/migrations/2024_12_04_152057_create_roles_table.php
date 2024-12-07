@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('role_name');
+            $table->string('role_name')->unique();
             $table->timestamps();
         });
     }
@@ -23,6 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('users'); // dropping users table first because of role_id foreign key dependecy
         Schema::dropIfExists('roles');
     }
 };
