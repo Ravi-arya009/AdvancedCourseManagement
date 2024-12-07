@@ -14,6 +14,12 @@
             <h3 class="card-title">Enrolled Students</h3>
         </div>
         <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <table class="table table-bordered">
                 <thead>
                     <tr>

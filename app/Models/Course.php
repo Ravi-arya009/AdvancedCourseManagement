@@ -19,10 +19,6 @@ class Course extends Model
         return $this->belongsTo(User::class, 'instructor_id');
     }
 
-    public function create()
-    {
-        return view('instructor.courses.create');
-    }
 
     public function enrollments()
     {

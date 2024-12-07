@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -22,7 +21,6 @@ class UserController extends Controller
     {
         return view('admin.create_user');
     }
-
 
     public function store(Request $request)
     {
@@ -46,6 +44,7 @@ class UserController extends Controller
 
         return redirect()->route('user.edit', $user->id)->with('success', 'User created successfully!');
     }
+
     public function edit(User $user)
     {
         if (Gate::denies('admin-only', Auth::user())) {
@@ -57,6 +56,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        //using gates
         if (Gate::denies('admin-only', Auth::user())) {
             abort(403, 'Unauthorized action.');
         }

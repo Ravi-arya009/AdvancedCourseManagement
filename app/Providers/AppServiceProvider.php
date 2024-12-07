@@ -57,6 +57,20 @@ class AppServiceProvider extends ServiceProvider
                         'url' => 'admin/user_list',
                         'icon' => 'fas fa-fw fa-user',
                     ]);
+
+                    //complex queries
+                    $event->menu->add('Complex queries');
+                    $event->menu->add([
+                        'text' => 'Top Students',
+                        'url' => 'admin/top_students_select_course',
+                        'icon' => 'fas fa-fw fa-user',
+                    ]);
+                    $event->menu->add([
+                        'text' => 'Top Courses',
+                        'url' => 'admin/top_courses_select_instructor',
+                        'icon' => 'fas fa-fw fa-user',
+                    ]);
+
                 }
 
                 // For Instructor role
