@@ -15,65 +15,73 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         Role::create(['role_name' => 'Admin']);
         Role::create(['role_name' => 'Instructor']);
         Role::create(['role_name' => 'Student']);
 
-        // User::factory()->create([
-        //     'name' => 'Test Admin',
-        //     'email' => 'admin@email.com',
-        //     'password'=>'raviarya',
-        //     'role_id' => 1
-        // ]);
+        //adding admin
+        User::factory()->create([
+            'name' => 'Test Admin',
+            'email' => 'admin@email.com',
+            'password'=>'12345678',
+            'role_id' => 1
+        ]);
 
-        //adding Instructors
-        // User::factory()->create([
-        //     'name' => 'Test Instructor',
-        //     'email' => 'instructor@email.com',
-        //     'password' => 'raviarya',
-        //     'role_id' => 2
-        // ]);
+        //adding 5 instructors
+        for ($i = 1; $i <= 5; $i++) {
+            User::factory()->create([
+                'name' => "Test Instructor $i",
+                'email' => "instructor$i@gmail.com",
+                'password' => '12345678',
+                'role_id' => 2,
+            ]);
+        }
 
-        // User::factory()->create([
-        //     'name' => 'Test Instructor 2',
-        //     'email' => 'instructor2@email.com',
-        //     'password' => 'raviarya',
-        //     'role_id' => 2
-        // ]);
-
-        // User::factory()->create([
-        //     'name' => 'Test Instructor 3',
-        //     'email' => 'instructor3@email.com',
-        //     'password' => 'raviarya',
-        //     'role_id' => 2
-        // ]);
-
-
-        //adding students
-        // User::factory()->create([
-        //     'name' => 'Test Student',
-        //     'email' => 'student@email.com',
-        //     'password' => 'raviarya',
-        //     'role_id' => 3
-        // ]);
-
-        // User::factory()->create([
-        //     'name' => 'Test Student2',
-        //     'email' => 'student2@email.com',
-        //     'password' => 'raviarya',
-        //     'role_id' => 3
-        // ]);
-
-        // User::factory()->create([
-        //     'name' => 'Test Student3',
-        //     'email' => 'student3@email.com',
-        //     'password' => 'raviarya',
-        //     'role_id' => 3
-        // ]);
+        //adding 10 students
+        for ($i = 1; $i <= 20; $i++) {
+            User::factory()->create([
+                'name' => "Test Student $i",
+                'email' => "student$i@gmail.com",
+                'password' => '12345678',
+                'role_id' => 3,
+            ]);
+        }
 
         //adding courses
-        // Course::factory(10)->create();
+        $courseTitles = [
+            'Introduction to Web Development',
+            'Advanced Python Programming',
+            'Data Science with R',
+            'Mastering Machine Learning',
+            'Digital Marketing Basics',
+            'Graphic Design for Beginners',
+            'Project Management Essentials',
+            'Cybersecurity Fundamentals',
+            'Creative Writing Workshop',
+            'Cloud Computing with AWS',
+        ];
+
+        $faker = \Faker\Factory::create();
+
+        foreach ($courseTitles as $title) {
+            Course::factory()->create([
+                'title' => $title,
+                'description' => $faker->paragraph(),
+                'instructor_id' => rand(2, 3),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+
+        //enrolling students to the courses
+        $this->call([
+            EnrollmentSeeder::class,
+        ]);
+
+        //seeding grades
+        $this->call([
+            GradeSeeder::class,
+        ]);
     }
 }

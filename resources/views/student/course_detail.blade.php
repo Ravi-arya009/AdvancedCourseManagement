@@ -3,13 +3,13 @@
 @section('title', 'Course Details')
 
 @section('content_header')
-    <h1>{{ $course->title }}</h1>
+    <h1>Course Details</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Course Details</h3>
+            <h3 class="card-title">{{ $course->title }}</h3>
         </div>
         <div class="card-body">
 
@@ -25,10 +25,9 @@
                 </div>
             @endif
 
+            <p><strong>Title:</strong> {{ $course->title }}</p>
             <p><strong>Description:</strong> {{ $course->description }}</p>
             <p><strong>Instructor:</strong> {{ $course->instructor->name }}</p>
-            <p><strong>Created At:</strong> {{ $course->created_at->format('d M, Y') }}</p>
-
 
             @if (!$isEnrolled)
                 <!-- Check if the user is not already enrolled -->

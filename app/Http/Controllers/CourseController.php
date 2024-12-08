@@ -23,7 +23,7 @@ class CourseController extends Controller
 
     public function create()
     {
-        return view('create_course');
+        return view('instructor.create_course');
     }
 
     public function store(Request $request)
@@ -44,7 +44,7 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
-        return view('create_course', compact('course'));
+        return view('instructor.create_course', compact('course'));
     }
 
     public function update(Request $request, $id)
@@ -66,7 +66,7 @@ class CourseController extends Controller
     {
         $instructorId = Auth::id();
         $courses = Course::where('instructor_id', $instructorId)->get();
-        return view('course_list', compact('courses'));
+        return view('instructor.course_list', compact('courses'));
     }
 
     public function delete($id)
@@ -79,7 +79,7 @@ class CourseController extends Controller
 
         $course->delete();
 
-        return redirect()->route('course.list')->with('success', 'Course deleted successfully.');
+        return redirect()->route('instructor.course.list')->with('success', 'Course deleted successfully.');
     }
 
     public function index()
@@ -165,6 +165,9 @@ class CourseController extends Controller
         );
 
         $student = User::all()->where('id', $validated['student_id']);
+
+        //forgetting the cached data.
+        Cache::forget("course_{$course->id}_students_with_grades");
 
         //sending notification after grade update
         Notification::send($student, new GradeUpdated($course, $validated['grade']));

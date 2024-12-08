@@ -31,7 +31,7 @@
                                 <td>{{ $course->title }}</td>
                                 <td>{{ Str::limit($course->description, 50) }}</td>
                                 <td>
-                                    <a href="{{route('course.view_students', $course->id)}}" class="btn btn-success">View Students</a>
+                                    <a href="{{ route('course.view_students', $course->id) }}" class="btn btn-success">View Students</a>
                                     <a href="{{ route('course.edit', $course->id) }}" class="btn btn-primary">Edit</a>
                                     <form action="{{ route('course.delete', $course->id) }}" method="POST" style="display: inline-block;" class="float-right">
                                         @csrf

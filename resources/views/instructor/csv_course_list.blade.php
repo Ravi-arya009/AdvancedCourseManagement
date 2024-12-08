@@ -31,7 +31,7 @@
                                 <td>{{ $course->title }}</td>
                                 <td>{{ Str::limit($course->description, 50) }}</td>
                                 <td>
-                                    <form action="{{route('courses.enroll_csv',$course->id)}}" method="POST" enctype="multipart/form-data" style="display: inline-block">
+                                    <form action="{{ route('courses.enroll_csv', $course->id) }}" method="POST" enctype="multipart/form-data" style="display: inline-block">
                                         @csrf
                                         <input type="file" name="csv_file" class="" required>
                                         <button type="submit" class="btn btn-primary float-right">Upload</button>

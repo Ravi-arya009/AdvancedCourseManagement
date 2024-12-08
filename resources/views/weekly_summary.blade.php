@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Weekly Summary</title>
 </head>
+
 <body>
     <h1>Weekly Summary for {{ $course->title }}</h1>
     <p>Instructor: {{ $instructor->name }}</p>
@@ -17,4 +19,5 @@
         @endforeach
     </ul>
 </body>
+
 </html>
