@@ -18,11 +18,18 @@ git clone https://github.com/Ravi-arya009/AdvancedCourseManagement.git
 ```
 
 
-2. Install dependencies: Navigate into the project directory and install the required PHP dependencies using Composer.
+2. Install dependencies: Navigate into the project directory and install the required dependencies and packages.
 ```
 cd AdvancedCourseManagement
-
+```
+```
 composer install
+```
+```
+npm install
+```
+```
+npm run build 
 ```
 
 3. Set up environment variables: Copy the .env.example file to .env.
