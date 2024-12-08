@@ -106,7 +106,7 @@ Replace /path/to/your/project with the actual path to your Laravel project direc
 You can manually run the cron job for testing using the following artisan command:
 
 ```
-php artisan send:weekly-summary
+php artisan app:send-weekly-summary
 ```
 
 This will execute the cron job immediately and send the email summaries to the instructors.
