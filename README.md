@@ -117,7 +117,7 @@ This will execute the cron job immediately and send the email summaries to the i
 
 - This project also logs the mails so that it can be checked if the mail delivery fails(which does frequently since temporary mailing service is used). When running weekly summary, you might encounter warning saying too many mails(since we're using free mailing service).
 
--A dummy csv file is provided named students.csv in the project directory.
+- A dummy csv file is provided named students.csv in the project directory.
 
 - Laravel's built in file caching is used instead of Redis or memcached to avoid multiple moving parts for now. In future it can be changed as the project grows.
 
