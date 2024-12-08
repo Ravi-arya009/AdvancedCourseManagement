@@ -115,13 +115,15 @@ This will execute the cron job immediately and send the email summaries to the i
 
 - Mail Configuration: This project uses a Mailtrap for development, ensure your .env file has the appropriate settings for mail delivery(temporary keys are provided in .env.example).
 
-- This project alsos logs the mails so that it can be checked if the mail delivery fails(which does frequently since temporary mailing service is used).
+- This project also logs the mails so that it can be checked if the mail delivery fails(which does frequently since temporary mailing service is used). When running weekly summary, you might encounter warning saying too many mails(since we're using free mailing service).
+
+-A dummy csv file is provided named students.csv in the project directory.
 
 - Laravel's built in file caching is used instead of Redis or memcached to avoid multiple moving parts for now. In future it can be changed as the project grows.
 
 - Middleware is used to restrict certain functionalities based on user roles. Additionally, as the project required the use of gates or policies, a gate is implemented in specific places (defined in AppServiceProvider.php) to demonstrate its usage.
 
-- An extra table name 'role' is used to keep track of user roles and make it dynamic and future proof.
+- An extra table name 'roles' is used to keep track of user roles and make it dynamic and future proof.
 
 - There're no such challenges faced in the project. Only challenge was to check Laravel's documentation while doing certain things because Laravel 11 changed a lot of traditional ways of doing things.
 
