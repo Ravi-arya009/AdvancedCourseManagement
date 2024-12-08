@@ -91,6 +91,11 @@ class AppServiceProvider extends ServiceProvider
                         'url' => 'instructor/course_list',
                         'icon' => 'fas fa-book',
                     ]);
+                    $event->menu->add([
+                        'text' => 'Upload CSV',
+                        'url' => 'instructor/csv_course_list/',
+                        'icon' => 'fas fa-book',
+                    ]);
                 }
 
                 // For Student role

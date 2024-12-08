@@ -12,11 +12,11 @@
             <h3 class="card-title text-white">List of All Courses</h3>
         </div>
         <div class="card-body">
-            @if($courses->isEmpty())
+            @if ($courses->isEmpty())
                 <p>No courses available.</p>
             @else
                 <ul class="list-group">
-                    @foreach($courses as $course)
+                    @foreach ($courses as $course)
                         <li class="list-group-item mb-2">
                             <h5>{{ $course->title }}</h5>
                             <p>{{ $course->description }}</p>

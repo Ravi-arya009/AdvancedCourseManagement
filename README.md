@@ -1,66 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project Name: Advanced Course Management
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Table of Contents
 
-## About Laravel
+### - Installation
+### - Database Setup and Seeding
+### - Running the Cron Job for Weekly Email Summaries
+### - Notes
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+To get your project up and running, follow these steps:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Clone the repository: First, clone the project repository to your local machine.
 
-## Learning Laravel
+```
+git clone https://github.com/Ravi-arya009/AdvancedCourseManagement.git
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Install dependencies: Navigate into the project directory and install the required PHP dependencies using Composer.
+```
+cd AdvancedCourseManagement
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+composer install
+```
 
-## Laravel Sponsors
+3. Set up environment variables: Copy the .env.example file to .env.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Database Setup and Seeding
 
-### Premium Partners
+1. Set up the database: Create a new MySQL database for the project.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+>Database name: advanced_course_management
 
-## Contributing
+2. Update your .env file: In the .env file, configure your database connection. Example:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=advanced_course_management
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+```
 
-## Code of Conduct
+3. Run the migrations: Run the migration command to set up your database schema.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+php artisan migrate
+```
 
-## Security Vulnerabilities
+4. Seed the database to populate the database with initial data, run the following command:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+php artisan db:seed
+```
 
-## License
+# Running the Cron Job for Weekly Email Summaries
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Linux setup
+1. Set up the system cron job: You need to add the Laravel scheduler to your system's cron jobs. Open the crontab for your user by running:
+
+```
+crontab -e
+```
+
+Add the following line to your crontab file to run the Laravel scheduler:
+
+```
+* * * * * cd /path/to/your/project && php artisan schedule:run >> /dev/null 2>&1
+```
+
+Replace /path/to/your/project with the actual path to your Laravel project directory.
+
+## Windows Setup
+### 1. Create a New Task:
+
+- Type taskschd.msc in run to open the Task Scheduler.
+- Create a new task and give it a name (e.g., Laravel Weekly Summary Cron Job).
+- To run the task in the background, select run whether the user is logged on or not and check the Hidden checkbox.
+
+### 2. Triggers
+
+- Create a new trigger.
+- Set the trigger to run Weekly.
+- Select the desired day (e.g., Monday) and time (e.g., 08:00 AM).
+
+### 3. Actions
+
+- Create a new action.
+- Start php by entering the php binary location, such as C:\php\php.exe
+- Set Add arguments field to C:\{project-dir}\artisan schedule:run  (replace {project-dir} with appropriate path).
+
+
+
+### Manually trigger the cron job for testing:
+
+You can manually run the cron job for testing using the following artisan command:
+
+```
+php artisan send:weekly-summary
+```
+
+This will execute the cron job immediately and send the email summaries to the instructors.
+
+## Notes:
+
+- Mail Configuration: This project uses a Mailtrap for development, ensure your .env file has the appropriate settings for mail delivery(temporary keys are provided in .env.example).
+
+- This project alsos logs the mails so that it can be checked if the mail delivery fails(which does frequently since temporary mailing service is used).
+
+- Laravel's built in file caching is used instead of Redis or memcached to avoid multiple moving parts for now. In future it can be changed as the project grows.
+
+- Middleware is used to restrict certain functionalities based on user roles. Additionally, as the project required the use of gates or policies, a gate is implemented in specific places (defined in AppServiceProvider.php) to demonstrate its usage.
+
+- An extra table name 'role' is used to keep track of user roles and make it dynamic and future proof.
+
+- There're no such challenges faced in the project. Only challenge was to check Laravel's documentation while doing certain things because Laravel 11 changed a lot of traditional ways of doing things.
+

@@ -14,7 +14,7 @@
         <div class="card-body">
             <table class="table table-bordered table-hover">
                 <thead>
-                    @if ($hasCourse==0)
+                    @if ($hasCourse == 0)
                         <tr>
                             <td>Course Hasn't been graded yet</td>
                         </tr>
